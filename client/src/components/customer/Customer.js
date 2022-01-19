@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import PrivateRoute from '../routing/PrivateRoute'
 import CustomerSidebar from './CustomerSidebar'
 
-import CustomerAppointment from './CustomerAppointment'
+import CustomerAppointments from './CustomerAppointments'
+import CustomerAppointmentCreate from './CustomerAppointmentCreate'
 import CustomerNotes from './CustomerNotes'
 import CustomerFaq from './CustomerFaq'
 import CustomerPromotion from './CustomerPromotion'
+import CustomerAppointmentEdit from './CustomerAppointmentEdit'
 
-const Customer = ({ setAlert, getMessages, getAdminUnreadMessages }) => {
+const Customer = () => {
   React.useEffect(() => {
   }, [])
 
@@ -22,7 +24,9 @@ const Customer = ({ setAlert, getMessages, getAdminUnreadMessages }) => {
             <Route exact path='/'>
               <Redirect to='/appointments' />
             </Route>
-            <PrivateRoute exact path="/appointments" component={CustomerAppointment} />
+            <PrivateRoute exact path="/appointments" component={CustomerAppointments} />
+            <PrivateRoute exact path="/appointment-create" component={CustomerAppointmentCreate} />
+            <PrivateRoute exact path="/appointment-edit/:id" component={CustomerAppointmentEdit} />
             <PrivateRoute exact path="/notes" component={CustomerNotes} />
             <PrivateRoute exact path="/promotions" component={CustomerPromotion} />
             <PrivateRoute exact path="/faq" component={CustomerFaq} />

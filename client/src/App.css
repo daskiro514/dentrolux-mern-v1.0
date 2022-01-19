@@ -286,3 +286,11 @@ table tbody tr td {
 .react-calendar__tile--now {
   border-radius: 6px;
 }
+
+.appointSelected {
+  background-color: #E3F2FD;
+}
+
+.width-100 {
+  min-width: 100px;
+}

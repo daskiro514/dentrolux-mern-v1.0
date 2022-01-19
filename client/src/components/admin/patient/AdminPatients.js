@@ -2,22 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { goPage } from '../../../actions/admin'
+import { getPatients } from '../../../actions/patient'
 
-const data = {
-	name: 'Gordon',
-	surname: 'Ramsey',
-	email: 'gramsey24@gmail.com',
-	phone: '404 547 6254',
-	lastVisit: '08/14/2020'
-}
-
-const AdminPatients = ({ patients, goPage }) => {
+const AdminPatients = ({ patients, getPatients, goPage }) => {
 	let history = useHistory()
 	const [searchKey, setSearchKey] = React.useState('')
 
 	const [pagePatients, setPagePatients] = React.useState([])
 	const [pageNumber, setPageNumber] = React.useState(1)
 	const [maxPageNumber, setMaxPageNumber] = React.useState(1)
+
+	React.useEffect(() => {
+		getPatients()
+	}, [getPatients])
 
 	React.useEffect(() => {
 		setPagePatients(patients.sort((element1, element2) => { return new Date(element2.date) - new Date(element1.date) }).slice((pageNumber - 1) * 10, pageNumber * 10))
@@ -84,13 +81,13 @@ const AdminPatients = ({ patients, goPage }) => {
 								</tr>
 							</thead>
 							<tbody>
-								{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) =>
+								{patients.map((item, index) =>
 									<tr key={index} className='cursor-pointer' onClick={() => goPage(history, `patient/${item._id}`)}>
-										<td>{data.name}</td>
-										<td>{data.surname}</td>
-										<td>{data.email}</td>
-										<td>{data.phone}</td>
-										<td>{data.lastVisit}</td>
+										<td>{item.firstName}</td>
+										<td>{item.lastName}</td>
+										<td>{item.email}</td>
+										<td>{item.phone}</td>
+										<td>{item.lastVisit}</td>
 									</tr>
 								)}
 							</tbody>
@@ -118,7 +115,7 @@ const AdminPatients = ({ patients, goPage }) => {
 
 const mapStateToProps = state => ({
 	currentPage: state.admin.currentPage,
-	patients: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	patients: state.patient.patients
 })
 
-export default connect(mapStateToProps, { goPage })(AdminPatients)
+export default connect(mapStateToProps, { goPage, getPatients })(AdminPatients)

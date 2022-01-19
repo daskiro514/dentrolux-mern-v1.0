@@ -11,7 +11,8 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
   const [isUploading, setIsUploading] = React.useState(false)
 
   const [formData, setFormData] = React.useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     rpassword: '',
@@ -24,7 +25,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     zip: '',
   })
 
-  const { name, email, password, rpassword, birth, age, sex, address, city, state, zip } = formData
+  const { firstName, lastName, email, password, rpassword, birth, age, sex, address, city, state, zip } = formData
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -35,7 +36,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     setIsUploading(true)
     if (password !== rpassword) {
       setAlert('Password is not matched. Please check again.', 'warning')
-      return;
+      return
     }
     register(formData, history)
   }
@@ -60,12 +61,23 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
                 <div className='row'>
                   <div className='col-md-12'>
                     <div className='form-group'>
-                      <label>Name</label>
+                      <label>First Name</label>
                       <input
                         type='text'
                         className='form-control'
-                        name='name'
-                        value={name}
+                        name='firstName'
+                        value={firstName}
+                        onChange={onChange}
+                        required
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label>Last Name</label>
+                      <input
+                        type='text'
+                        className='form-control'
+                        name='lastName'
+                        value={lastName}
                         onChange={onChange}
                         required
                       />

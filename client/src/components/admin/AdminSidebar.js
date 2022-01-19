@@ -26,7 +26,7 @@ const AdminSidebar = ({ user, logout, setCurrentPage, currentPage }) => {
           <div className='d-flex flex-column w-100 px-3 py-3 user-logo'>
             {/* <img src='/logo.png' alt='logo' /> */}
             <img src={user.avatar} className='rounded-circle' width='60px' alt='PROFILE' />
-            <div className="text-center mt-2">{user.name}</div>
+            <div className="text-center mt-2">{user.firstName} {user.lastName}</div>
           </div>
         </div>
 

@@ -5,20 +5,6 @@ import {
 const initialState = {
   currentPage: 'dashboard',
   isLoading: false,
-  clients: [],
-  adminClient: {
-    firstName: '',
-    lastName: ''
-  },
-  clientIDForChat: null,
-  adminClientCurrentPage: 'document',
-  adminClientOrders: [],
-  courses: [],
-  course: {
-    title: '',
-    description: '',
-    video: ''
-  }
 }
 
 const adminReducer = (state = initialState, action) => {
