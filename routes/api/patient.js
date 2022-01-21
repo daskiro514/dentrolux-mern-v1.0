@@ -6,7 +6,6 @@ const User = require('../../models/User')
 
 router.get('/getPatients', async (req, res) => {
   const patients = await User.find({ type: 'customer' })
-  console.log(patients)
 
   res.json({
     success: true,

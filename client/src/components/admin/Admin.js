@@ -4,16 +4,15 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import PrivateRoute from '../routing/PrivateRoute'
 import AdminSidebar from './AdminSidebar'
 
-import AdminPatients from './patient/AdminPatients'
-import AdminPatient from './patient/AdminPatient'
-import AdminAppointment from './appointment/AdminAppointment'
+import AdminPatients from './AdminPatients'
+import AdminPatient from './AdminPatient'
+import AdminAppointments from './AdminAppointments'
 import AdminPromotion from './AdminPromotion'
 import AdminFaq from './AdminFaq'
+import AdminNoteCreate from './AdminNoteCreate'
+import AdminNoteEdit from './AdminNoteEdit'
 
-const Admin = ({ currentPage }) => {
-  React.useEffect(() => {
-  }, [])
-
+const Admin = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
@@ -25,7 +24,9 @@ const Admin = ({ currentPage }) => {
             </Route>
             <PrivateRoute exact path="/patients" component={AdminPatients} />
             <PrivateRoute exact path="/patient/:id" component={AdminPatient} />
-            <PrivateRoute exact path="/appointments" component={AdminAppointment} />
+            <PrivateRoute exact path="/note-create/:patientID" component={AdminNoteCreate} />
+            <PrivateRoute exact path="/note-edit/:patientID" component={AdminNoteEdit} />
+            <PrivateRoute exact path="/appointments" component={AdminAppointments} />
             <PrivateRoute exact path="/promotions" component={AdminPromotion} />
             <PrivateRoute exact path="/faq" component={AdminFaq} />
           </Router>
@@ -36,7 +37,7 @@ const Admin = ({ currentPage }) => {
 }
 
 const mapStateToProps = state => ({
-  currentPage: state.admin.currentPage
+
 })
 
 export default connect(mapStateToProps, {})(Admin)

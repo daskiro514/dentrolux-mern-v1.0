@@ -20,9 +20,9 @@ const AppointmentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
-  approved: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    default: 'Pending'
   },
   approvedTime: {
     type: String,

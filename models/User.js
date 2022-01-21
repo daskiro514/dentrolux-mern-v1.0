@@ -33,6 +33,9 @@ const UserSchema = new mongoose.Schema({
   birth: {
     type: String,
   },
+  phone: {
+    type: String
+  },
   age: {
     type: Number,
   },

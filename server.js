@@ -15,6 +15,7 @@ app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/appointment', require('./routes/api/appointment'))
 app.use('/api/patient', require('./routes/api/patient'))
+app.use('/api/note', require('./routes/api/note'))
 
 // Serve frontend built
 app.use(express.static(__dirname + '/client/build'))

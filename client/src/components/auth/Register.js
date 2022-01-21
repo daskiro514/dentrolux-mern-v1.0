@@ -14,6 +14,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     password: '',
     rpassword: '',
     birth: '',
@@ -25,7 +26,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     zip: '',
   })
 
-  const { firstName, lastName, email, password, rpassword, birth, age, sex, address, city, state, zip } = formData
+  const { firstName, lastName, email, phone, password, rpassword, birth, age, sex, address, city, state, zip } = formData
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -33,11 +34,11 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
 
   const onSubmit = e => {
     e.preventDefault()
-    setIsUploading(true)
     if (password !== rpassword) {
       setAlert('Password is not matched. Please check again.', 'warning')
       return
     }
+    setIsUploading(true)
     register(formData, history)
   }
 
@@ -89,6 +90,16 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
                         className='form-control'
                         name='email'
                         value={email}
+                        onChange={onChange}
+                        required
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label>Phone Number</label>
+                      <input
+                        className='form-control'
+                        name='phone'
+                        value={phone}
                         onChange={onChange}
                         required
                       />

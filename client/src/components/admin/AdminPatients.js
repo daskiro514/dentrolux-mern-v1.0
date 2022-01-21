@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { goPage } from '../../../actions/admin'
-import { getPatients } from '../../../actions/patient'
+import { goPage } from '../../actions/admin'
+import { getPatients } from '../../actions/patient'
 
 const AdminPatients = ({ patients, getPatients, goPage }) => {
 	let history = useHistory()
@@ -15,6 +15,10 @@ const AdminPatients = ({ patients, getPatients, goPage }) => {
 	React.useEffect(() => {
 		getPatients()
 	}, [getPatients])
+
+	React.useEffect(() => {
+    setPagePatients(patients.filter(patient => patient.firstName.toLowerCase().includes(searchKey.toLowerCase()) || patient.lastName.toLowerCase().includes(searchKey.toLowerCase()) || patient.email.toLowerCase().includes(searchKey.toLowerCase())))
+  }, [patients, searchKey])
 
 	React.useEffect(() => {
 		setPagePatients(patients.sort((element1, element2) => { return new Date(element2.date) - new Date(element1.date) }).slice((pageNumber - 1) * 10, pageNumber * 10))
@@ -73,21 +77,21 @@ const AdminPatients = ({ patients, getPatients, goPage }) => {
 						<table className='table table-striped'>
 							<thead>
 								<tr>
+									<th>No</th>
 									<th>Name</th>
 									<th>Surname</th>
 									<th>Email</th>
 									<th>Phone Number</th>
-									<th>Last Visit</th>
 								</tr>
 							</thead>
 							<tbody>
-								{patients.map((item, index) =>
+								{pagePatients.map((item, index) =>
 									<tr key={index} className='cursor-pointer' onClick={() => goPage(history, `patient/${item._id}`)}>
+										<td>{(pageNumber - 1) * 10 + index + 1}</td>
 										<td>{item.firstName}</td>
 										<td>{item.lastName}</td>
 										<td>{item.email}</td>
 										<td>{item.phone}</td>
-										<td>{item.lastVisit}</td>
 									</tr>
 								)}
 							</tbody>

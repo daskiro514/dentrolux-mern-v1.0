@@ -25,7 +25,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() })
     }
 
-    const { firstName, lastName, email, password, birth, age, sex, address, city, state, zip } = req.body
+    const { firstName, lastName, email, phone, password, birth, age, sex, address, city, state, zip } = req.body
 
     try {
       let user = await User.findOne({ email })
@@ -43,6 +43,7 @@ router.post(
         lastName,
         avatar,
         email,
+        phone,
         password,
         birth,
         age,

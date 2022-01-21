@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { getCustomerNotes } from '../../actions/note'
 
-const CustomerNotes = ({ getAdminClients, clients, goPage }) => {
-	const data = {
-		date: '10/14/2019',
-		subject: 'Root Canal',
-		notes: 'Attempted root canal treatment on tooth 15. Examination of the X-ray revealed that the canal has closed off. The patient has been informed that the tooth can  either be extracted and crowned or have a post and core and be crowned. A treatment plan is being determined.'
-	}
+const CustomerNotes = ({ userID, notes, getCustomerNotes }) => {
+
+	React.useEffect(() => {
+		getCustomerNotes(userID)
+	}, [userID, getCustomerNotes])
 
 	return (
 		<div className='admin-dashboard'>
@@ -30,11 +30,11 @@ const CustomerNotes = ({ getAdminClients, clients, goPage }) => {
 									</tr>
 								</thead>
 								<tbody>
-									{[0, 1, 2].map((item, index) =>
+									{notes.map((item, index) =>
 										<tr key={index}>
-											<td>{data.date}</td>
-											<td>{data.subject}</td>
-											<td>{data.notes}</td>
+											<td>{item.date}</td>
+											<td>{item.subject}</td>
+											<td>{item.note}</td>
 										</tr>
 									)}
 								</tbody>
@@ -48,7 +48,8 @@ const CustomerNotes = ({ getAdminClients, clients, goPage }) => {
 }
 
 const mapStateToProps = state => ({
-	// clients: state.admin.clients
+	notes: state.note.notes,
+	userID: state.auth.user._id
 })
 
-export default connect(mapStateToProps, {})(CustomerNotes)
+export default connect(mapStateToProps, { getCustomerNotes })(CustomerNotes)
